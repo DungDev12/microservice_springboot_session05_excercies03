@@ -6,11 +6,13 @@ spring:
       gateway:
           server:
               webflux:
-                  routes:
+                routes:
                       - id: product-service
                         uri: lb://PRODUCT-SERVICE
                         predicates:
                           - Path=/api/products/**
+                        filters:
+                          - AddResponseHeader=X-System-Name, Api-Gateway-System
 server:
     port: 8080
 
